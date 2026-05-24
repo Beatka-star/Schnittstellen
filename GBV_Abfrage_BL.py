@@ -74,7 +74,7 @@ def parse_results(xml_text):
         print("---")
 
 # Menü
-choice = input("Suche nach: (1) Titelstichwort  (2) Autor  (3) ISBN: ")
+choice = input("Suche nach:\n(1) Titelstichwort\n(2) Autor\n(3) ISBN: ")
 if choice > "3":
     print (FEHLER_UNGUELTIGE_AUSWAHL)
 else:
