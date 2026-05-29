@@ -44,13 +44,13 @@ def find_variables_xml(xml_dataset):
         availability = []
 
         # available
-        for av in item.findall(".//{*}available"):
-            service = av.get("service")  # loan, presentation, interloan
+        for i in item.findall(".//{*}available"):
+            service = i.get("service")  # loan, presentation, interloan
             availability.append(f"{service}: available")
 
         # unavailable
-        for uv in item.findall(".//{*}unavailable"):
-            service = uv.get("service")
+        for j in item.findall(".//{*}unavailable"):
+            service = j.get("service")
             availability.append(f"{service}: unavailable")
 
         # alles pro Exemplar speichern
