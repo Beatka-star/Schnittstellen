@@ -2,10 +2,10 @@ import requests
 import xml.etree.ElementTree as ET
 
 
-# Ausgabe der gefundenen Treffer
+# Ausgabe der Treffer
 def output_xml(found_variables):
 
-    # Schleife über alle gefundenen Bücher
+    # Schleife über alle Medien
     for index, book in enumerate(found_variables, start=1):
 
         print(f"\n{index}. Treffer")
@@ -98,20 +98,18 @@ def find_variables_xml(xml_dataset):
         # Liste für Schlagworte
         subjects = []
 
-        # Alle Schlagworte sammeln
+        # Alle Schlagworte listen
         for sub in mods.findall(".//mods:topic", ns):
             if sub.text:
                 subjects.append(sub.text)
 
-        # Daten eines Buches speichern
+        # Daten einer Aufnahme speichern
         books.append({
             "title": title,
             "authors": authors,
             "isbns": isbns,
             "subjects": subjects
         })
-
-    # Ergebnisliste zurückgeben
     return books
 
 
