@@ -31,13 +31,13 @@ def find_variables_xml(xml_dataset):
     # Ergebnisliste für alle Exemplare
     items = []
 
-    # alle item-Knoten im XML durchgehen (Wildcard wegen Namespace)
+    # alle items durchlaufen
     for item in root.findall(".//{*}item"):
 
-        # Signatur (z.B. Standort / Signatur im Regal)
+        # Signatur
         label = item.findtext(".//{*}label")
 
-        # eindeutige ID des Exemplars (EPN)
+        # eindeutige ID
         epn = item.get("id")
 
         # Liste für Verfügbarkeitsinfos
