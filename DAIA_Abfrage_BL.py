@@ -44,5 +44,7 @@ def parse_results(xml_text):
 
 
 # Menü
-ppn = input("Bitte geben Sie PPN-ID an: ")
-daia_abfrage(ppn)
+if __name__ == "__main__":
+    ppn = input("Bitte geben Sie PPN-ID an: ")
+    daia_abfrage(ppn)
+
