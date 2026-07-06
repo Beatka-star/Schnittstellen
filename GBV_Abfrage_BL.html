@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module GBV_Abfrage_BL</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title">GBV_Abfrage_BL</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Ckaila%5Conedrive%5Cth-wildau%5Cdatenformate_schnittstellen%5Cschnittstellen%5Cgbv_abfrage_bl.py">c:\users\kaila\onedrive\th-wildau\datenformate_schnittstellen\schnittstellen\gbv_abfrage_bl.py</a></td></tr></table>
+    <p><span class="code">!&nbsp;/usr/bin/python3<br>
+Programm,&nbsp;mit&nbsp;dem&nbsp;man&nbsp;über&nbsp;die&nbsp;SRU&nbsp;Schnittstelle&nbsp;im<br>
+GBV&nbsp;nach&nbsp;Titelstichwörtern,&nbsp;Autoren&nbsp;und&nbsp;ISBN&nbsp;recherchieren&nbsp;kann<br>
+(Kombinationen&nbsp;der&nbsp;Suchfelder&nbsp;war&nbsp;&nbsp;nicht&nbsp;erforderlich).<br>
+Ausgabe:&nbsp;ISBN,&nbsp;Autor,&nbsp;Titel,&nbsp;Schlagworte<br>
+Quelle:&nbsp;<a href="https://verbundwiki.gbv.de/display/VZG/SRU">https://verbundwiki.gbv.de/display/VZG/SRU</a><br>
+&nbsp;<br>
+Version&nbsp;1.0,&nbsp;Autoren:&nbsp;Beata&nbsp;Lakeberg,&nbsp;Sebastian&nbsp;Scherübl,&nbsp;Claus&nbsp;Werner</span></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="xml.etree.ElementTree.html">xml.etree.ElementTree</a><br>
+</td><td class="multicolumn"><a href="requests.html">requests</a><br>
+</td><td class="multicolumn"></td><td class="multicolumn"></td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor functions-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
+    
+<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt><a name="-gbv_abfrage"><strong>gbv_abfrage</strong></a>(query_type, search_term, max_records=10)</dt><dd><span class="code">query_type:&nbsp;'tit',&nbsp;'prs',&nbsp;oder&nbsp;'isbn'</span></dd></dl>
+ <dl><dt><a name="-parse_results"><strong>parse_results</strong></a>(xml_text)</dt></dl>
+</td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>BASE_URL</strong> = 'https://sru.k10plus.de/gvk'<br>
+<strong>FEHLER_UNGUELTIGE_AUSWAHL</strong> = 'Bitte 1,2 oder 3 auswählen.'<br>
+<strong>choice</strong> = ''<br>
+<strong>term</strong> = ''</td></tr></table>
+</body></html>
