@@ -53,7 +53,7 @@ def parse_results(xml_text):
         # wenn erster gefunden wird, dann wird ausgegeben
         isbn = record.find(".//datafield[@tag='020']/subfield[@code='a']")
         autor = record.find(".//datafield[@tag='100']/subfield[@code='a']")
-        herausgeber = record.find(".//datafield[@tag='245']/subfield[@code='c']") #Versuchen mit 700 ähnlich wie mit Schlagworten
+        herausgeber = record.find(".//datafield[@tag='245']/subfield[@code='c']") #Versuchen mit 700 ähnlich wie mit Schlagwortenpy
         titel = record.find(".//datafield[@tag='245']/subfield[@code='a']")
         untertitel = record.find(".//datafield[@tag='245']/subfield[@code='b']")
         #Ausgabe der Ergebnisse
