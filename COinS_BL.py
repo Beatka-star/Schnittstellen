@@ -43,7 +43,7 @@ def kobv_abfrage (kataloglink):
 
     # Statuscode prüfen, wenn Fehlermeldung kommt, kann es an folgenden liegen: Seite nicht gefunden (404); Zugriff verweigert (403); Serverfehler (500)
     if response.status_code != 200:
-        print("Fehler! Statuscode:", response.status_code)
+        print("Anfrage fehlgeschlagen! Statuscode:", response.status_code)
         sys.exit(1)
 
     if DEBUG:
