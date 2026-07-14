@@ -26,13 +26,23 @@ DEBUG=True
 Zwar wird hier, wie gewünscht, die KOBV.Abfrage gemacht, der Programm funktioniert aber auch mit Links zu anderen Katalogen, 
 die COinS haben (z.B. BVB)."""
 
+"""
+...
+Hinweis: KOBV, GBV und WorldCat verwenden Bot-Schutz (Anubis),der ohne JavaScript nicht umgehbar ist. Das Programm wurde 
+erfolgreich mit Katalog von BVB und Wikipedia getestet (88 COinS gefunden).
+"""
+
 def kobv_abfrage (kataloglink):
 
     #User-Agent Header. Damit schickt der Brawser die Erkennung, dass es kein Bot ist
-    headers={
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0"
-    }
 
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml",
+        "Accept-Language": "de-DE,de;q=0.9",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Connection": "keep-alive"
+    }
     #Prüfen, ob die Verbindung funktioniert:
     try:
         response = requests.get(url=kataloglink, headers=headers)
@@ -67,17 +77,17 @@ def parse_results (html_inhalt):
     print("Gefundene COinS: ", len(alle_coins)) #Gibt alle gefundene COinS aus
 
     for coins in alle_coins:
-        daten = parse_qs(coins["title"]) #nacht aus einen URL-String ein Dictionary
-        #für Autorangaben werden mehrere Keys überpruft
-        autor=daten.get("rft.au", ["None"])[0]
+        daten = parse_qs(coins["title"]) #nacht aus einen URL-String ein Dictionary und gibt Listen zurück (auch wenn die Liste 1 Wert enthält).
+        #für Autorangaben werden mehrere Keys überprüft
+        autor=daten.get("rft.au", [None])[0] #Liesst erstes Element aus der Liste
         if not autor:
-            nachname=daten.get("rft.aulast,", ["-"])[0]
-            vorname = daten.get("rft.aufirst,", ["-"])[0]
+            nachname=daten.get("rft.aulast", ["-"])[0]
+            vorname = daten.get("rft.aufirst", ["-"])[0]
             autor=nachname+" "+vorname
 
         #Seitenangaben bei Zeitschriftenartikel müssen getrennt ausgelesen werden
-        spage=daten.get("rft.spages", ["-"])[0]
-        epage=daten.get("rft.epages", ["-"])[0]
+        spage=daten.get("rft.spage", ["-"])[0]
+        epage=daten.get("rft.epage", ["-"])[0]
         seitenangaben=spage+" - "+epage
 
         #Ausgabe
@@ -98,4 +108,5 @@ if __name__ == "__main__":
     kataloglink = input("Bitte geben Sie einen Link zum Exemplar an: ")
     html_inhalt=kobv_abfrage(kataloglink)
     parse_results(html_inhalt)
+
 
