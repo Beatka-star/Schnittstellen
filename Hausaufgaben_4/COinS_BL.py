@@ -15,7 +15,7 @@ date: 2026-07-12
 
 import requests
 import sys
-from sys import argv
+from sys import argv  # TODO: argv wird nicht im Code verwendet
 from bs4 import BeautifulSoup
 from urllib.parse import parse_qs
 
@@ -37,7 +37,7 @@ def kobv_abfrage (kataloglink):
     #User-Agent Header. Damit schickt der Brawser die Erkennung, dass es kein Bot ist
 
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "User-Agent": "python-requests/2.28.1",
         "Accept": "text/html,application/xhtml+xml",
         "Accept-Language": "de-DE,de;q=0.9",
         "Accept-Encoding": "gzip, deflate, br",
@@ -47,8 +47,8 @@ def kobv_abfrage (kataloglink):
     try:
         response = requests.get(url=kataloglink, headers=headers)
     except Exception as e:
-         print(f"\nFehler in der Verbindung:\n{e}")
-         sys.exit(1)
+        print("\nFehler in der Verbindung:\n")
+        sys.exit(1)
     #Wenn die Fehlermeldung kommt, kann es an folgenden liegen: Server ist nicht erreichbar; kein Internet;URL ist falsch geschrieben
 
     # Statuscode prüfen, wenn Fehlermeldung kommt, kann es an folgenden liegen: Seite nicht gefunden (404); Zugriff verweigert (403); Serverfehler (500)
