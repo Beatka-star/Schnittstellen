@@ -15,7 +15,7 @@ date: 2026-07-12
 
 import requests
 import sys
-from sys import argv  # TODO: argv wird nicht im Code verwendet
+#from sys import argv  #  ist wahrscheinlich von Entwurf geblieben...
 from bs4 import BeautifulSoup
 from urllib.parse import parse_qs
 
@@ -40,13 +40,13 @@ def kobv_abfrage (kataloglink):
         "User-Agent": "python-requests/2.28.1",
         "Accept": "text/html,application/xhtml+xml",
         "Accept-Language": "de-DE,de;q=0.9",
-        "Accept-Encoding": "gzip, deflate, br",
+        #"Accept-Encoding": "gzip, deflate, br", #Ich hatte mit Encoding Fehlermeldung bei KOBV, jetzt passt! Auch in BVB
         "Connection": "keep-alive"
     }
     #Prüfen, ob die Verbindung funktioniert:
     try:
         response = requests.get(url=kataloglink, headers=headers)
-    except Exception as e:
+    except Exception:
         print("\nFehler in der Verbindung:\n")
         sys.exit(1)
     #Wenn die Fehlermeldung kommt, kann es an folgenden liegen: Server ist nicht erreichbar; kein Internet;URL ist falsch geschrieben
@@ -78,8 +78,8 @@ def parse_results (html_inhalt):
 
     for coins in alle_coins:
         daten = parse_qs(coins["title"]) #nacht aus einen URL-String ein Dictionary und gibt Listen zurück (auch wenn die Liste 1 Wert enthält).
-        #für Autorangaben werden mehrere Keys überprüft
-        autor=daten.get("rft.au", [None])[0] #Liesst erstes Element aus der Liste
+        #für Autoranangaben werden mehrere Keys überprüft
+        autor=daten.get("rft.au", [None])[0] #Liest erstes Element aus der Liste
         if not autor:
             nachname=daten.get("rft.aulast", ["-"])[0]
             vorname = daten.get("rft.aufirst", ["-"])[0]
@@ -105,7 +105,7 @@ def parse_results (html_inhalt):
 
 # Menü
 if __name__ == "__main__":
-    kataloglink = input("Bitte geben Sie einen Link zum Exemplar an: ")
+    kataloglink = input("Bitte geben Sie einen Permalink zum Exemplar an: ")
     html_inhalt=kobv_abfrage(kataloglink)
     parse_results(html_inhalt)
 
