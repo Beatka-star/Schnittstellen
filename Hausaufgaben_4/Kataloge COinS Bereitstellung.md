@@ -15,5 +15,5 @@ view-source:https://portal.kobv.de/simpleSearch.do?query=Atom%2C+Strom%2C+protes
 BU TUM
 view-source:https://search.ub.tum.de/vufind/
 
-WorldCut
+WorldCat
 view-source:https://search.worldcat.org/de
