@@ -4,7 +4,7 @@
 """
 Programm, das Metadaten via COinS aus dem KOBV Portal liest und die bibliographischen Angaben ausgibt.
 ...
-authors: Beata Lakenberg, Sebastian Scherübl, Claus Werner
+authors: Beata Lakeberg, Sebastian Scherübl, Claus Werner
 license: MIT License
 version: 1.0
 date: 2026-07-12
@@ -15,7 +15,6 @@ date: 2026-07-12
 
 import requests
 import sys
-#from sys import argv  #  ist wahrscheinlich von Entwurf geblieben...
 from bs4 import BeautifulSoup
 from urllib.parse import parse_qs
 
@@ -28,8 +27,8 @@ die COinS haben (z.B. BVB)."""
 
 """
 ...
-Hinweis: KOBV, GBV und WorldCat verwenden Bot-Schutz (Anubis),der ohne JavaScript nicht umgehbar ist. Das Programm wurde 
-erfolgreich mit Katalog von BVB und Wikipedia getestet (88 COinS gefunden).
+Hinweis: KOBV, GBV und WorldCat verwenden Bot-Schutz (Anubis). Deswegen wurde User-Agent Header eingebaut. Das Programm wurde 
+erfolgreich auch mit Katalog von BVB und Wikipedia getestet.
 """
 
 def kobv_abfrage (kataloglink):
@@ -40,7 +39,6 @@ def kobv_abfrage (kataloglink):
         "User-Agent": "python-requests/2.28.1",
         "Accept": "text/html,application/xhtml+xml",
         "Accept-Language": "de-DE,de;q=0.9",
-        #"Accept-Encoding": "gzip, deflate, br", #Ich hatte mit Encoding Fehlermeldung bei KOBV, jetzt passt! Auch in BVB
         "Connection": "keep-alive"
     }
     #Prüfen, ob die Verbindung funktioniert:
@@ -49,7 +47,7 @@ def kobv_abfrage (kataloglink):
     except Exception:
         print("\nFehler in der Verbindung:\n")
         sys.exit(1)
-    #Wenn die Fehlermeldung kommt, kann es an folgenden liegen: Server ist nicht erreichbar; kein Internet;URL ist falsch geschrieben
+    #Wenn die Fehlermeldung kommt, kann es an folgenden liegen: Server ist nicht erreichbar; kein Internet; URL ist falsch geschrieben
 
     # Statuscode prüfen, wenn Fehlermeldung kommt, kann es an folgenden liegen: Seite nicht gefunden (404); Zugriff verweigert (403); Serverfehler (500)
     if response.status_code != 200:
@@ -77,8 +75,9 @@ def parse_results (html_inhalt):
     print("Gefundene COinS: ", len(alle_coins)) #Gibt alle gefundene COinS aus
 
     for coins in alle_coins:
-        daten = parse_qs(coins["title"]) #nacht aus einen URL-String ein Dictionary und gibt Listen zurück (auch wenn die Liste 1 Wert enthält).
-        #für Autoranangaben werden mehrere Keys überprüft
+        daten = parse_qs(coins["title"]) #macht aus einen URL-String ein Dictionary und gibt Listen zurück (auch wenn die Liste 1 Wert enthält).
+
+        #für Autoranangaben werden mehrere Keys überprüft:
         autor=daten.get("rft.au", [None])[0] #Liest erstes Element aus der Liste
         if not autor:
             nachname=daten.get("rft.aulast", ["-"])[0]
@@ -95,9 +94,7 @@ def parse_results (html_inhalt):
         print("Herausgeber:in", daten.get("rft.aucorp",["-"])[0])
         print("Artikeltitel:", daten.get("rft.atitle", ["-"])[0])
         print("Titel:", daten.get("rft.title", ["-"])[0])
-        #print("Zeitschrifttitel:", daten.get("rft.title", ["-"])[0])
         print("Seitenangaben:", seitenangaben)
-        #print("Monographietitel:", daten.get("rft.btitle", ["-"])[0])
         print("ISBN: ", daten.get("rft.isbn", ["-"])[0])
         print("ISSN: ", daten.get("rft.issn", ["-"])[0])
         print("Seitenzahl:", daten.get("rft.pages", ["-"])[0])
