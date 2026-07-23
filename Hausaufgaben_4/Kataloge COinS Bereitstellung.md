@@ -11,3 +11,9 @@ view-source:https://opac.k10plus.de/DB=2.299/SET=1/TTL=1/PRS=HOL/SHW?FRST=1&HILN
 
 KOBV
 view-source:https://portal.kobv.de/simpleSearch.do?query=Atom%2C+Strom%2C+protest&plv=2
+
+BU TUM
+view-source:https://search.ub.tum.de/vufind/
+
+WorldCat
+view-source:https://search.worldcat.org/de
